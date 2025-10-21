@@ -1,9 +1,12 @@
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { JukefyLogo } from "@/components/JukefyLogo";
 import { ArtistHeader } from "@/components/ArtistHeader";
 import { NowPlaying } from "@/components/NowPlaying";
 import { QueueList } from "@/components/QueueList";
 import { AddSongDialog } from "@/components/AddSongDialog";
+import { Button } from "@/components/ui/button";
+import { LogIn } from "lucide-react";
 import artistImage from "@/assets/artist-profile.jpg";
 
 interface Song {
@@ -15,6 +18,7 @@ interface Song {
 }
 
 const Index = () => {
+  const navigate = useNavigate();
   const [queue, setQueue] = useState<Song[]>([
     {
       id: "1",
@@ -49,7 +53,17 @@ const Index = () => {
 
   return (
     <main className="min-h-screen bg-background pb-24">
-      <JukefyLogo />
+      <div className="flex justify-between items-center px-6 py-4">
+        <JukefyLogo />
+        <Button 
+          onClick={() => navigate("/auth")} 
+          variant="outline"
+          size="sm"
+        >
+          <LogIn className="mr-2 h-4 w-4" />
+          Login
+        </Button>
+      </div>
       <ArtistHeader name="DJ Purple Beats" image={artistImage} />
       
       <div className="space-y-6 py-6">
